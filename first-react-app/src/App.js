@@ -2,16 +2,20 @@ import React from 'react';
 
 class App extends React.Component {
   render() {
-    return <button><Heart />React</button>
+    return <Title text="The Text"/>
   }
 }
 
-const Button = (props) => <button>{props.children}</button>
+const Title = (props) => <h1>{props.text}</h1>
 
-class Heart extends React.Component {
-  render() {
-    return <span>&hearts;</span>
+Title.propTypes = {
+  text(props, propName, component) {
+    if(!propName in props) {
+      return new Error('missing ${propName}')
+    }
+    if(props[propName].length < 6) {
+      return new Error('{$propName} was too short')
+    }
   }
 }
-
 export default App
